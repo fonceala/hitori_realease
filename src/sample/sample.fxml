@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
 
     <top>
@@ -16,9 +18,17 @@
             <HBox alignment="CENTER">
                 <Button prefWidth="80" text="Check" />
             </HBox>
-            <HBox alignment="CENTER" spacing="10">
-
-                <Button prefWidth="90" text="Mode" />
+            <HBox alignment="CENTER" spacing="10" fx:id="bottomBox">
+                <ComboBox fx:id="box" promptText="Mode">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="4x4"/>
+                            <String fx:value="5x5"/>
+                            <String fx:value="6x6"/>
+                            <String fx:value="7x7"/>
+                        </FXCollections>
+                    </items>
+                </ComboBox>
                 <Button prefWidth="90" text="Restart" />
                 <Button prefWidth="90" text="Rules" />
             </HBox>
