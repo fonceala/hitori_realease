@@ -29,8 +29,8 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
-                <Button prefWidth="90" text="Restart" />
-                <Button prefWidth="90" text="Rules" />
+                <Button fx:id="restart" prefWidth="90" text="Restart" />
+                <Button fx:id="rules" prefWidth="90" text="Rules" />
             </HBox>
         </VBox>
     </bottom>
