@@ -6,7 +6,7 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
-<BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1 " fx:controller="sample.Controller">
 
     <top>
         <Label text="Hitori Game" BorderPane.alignment="TOP_CENTER" />
@@ -30,7 +30,7 @@
                     </items>
                 </ComboBox>
                 <Button prefWidth="90" text="Restart" />
-                <Button prefWidth="90" text="Rules" />
+                <Button prefWidth="90" text="Rules" onAction="#handle" />
             </HBox>
         </VBox>
     </bottom>
