@@ -31,12 +31,13 @@
                 </ComboBox>
                 <Button prefWidth="90" text="Restart" />
                 <Button prefWidth="90" text="Rules" onAction="#handle" />
+                <Button prefWidth="90" text="Start" fx:id="startButton" onAction="#handleStartButton"></Button>
             </HBox>
         </VBox>
     </bottom>
    <center>
-      <Canvas height="200.0" width="393.0" BorderPane.alignment="CENTER" >
-          
+      <Canvas height="200.0" width="393.0" BorderPane.alignment="CENTER" fx:id="gameMatrix">
+
        </Canvas>
    </center>
 </BorderPane>

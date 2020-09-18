@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -19,7 +21,14 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
 
     @FXML
-    private Button rules;
+    private javafx.scene.control.Button startButton;
+
+    @FXML
+    private Canvas gameMatrix;
+
+    @FXML
+    private ComboBox box;
+
     @FXML
 
         public void handle(ActionEvent event) {
@@ -42,6 +51,15 @@ public class Controller implements Initializable {
                 }
             }
 
+    @FXML
+    public void handleStartButton(ActionEvent event){
+            int matrixSize = Integer.valueOf(box.getId().charAt(0));
+            for(int i = 0; i < matrixSize; i++){
+                for(int j = 0; j < matrixSize; j++){
+
+                }
+            }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
