@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1 " fx:controller="sample.Controller" fx:id="root" >
+<BorderPane fx:id="root" prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
     <top>
         <Label text="Hitori Game" BorderPane.alignment="TOP_CENTER" />
@@ -18,21 +17,21 @@
             <HBox alignment="CENTER">
                 <Button prefWidth="80" text="Check" />
             </HBox>
-            <HBox alignment="CENTER" spacing="10" fx:id="bottomBox">
+            <HBox fx:id="bottomBox" alignment="CENTER" spacing="10">
                 <ComboBox fx:id="box" promptText="Mode">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
 
-                            <String fx:value="5"/>
-                            <String fx:value="6"/>
-                            <String fx:value="7"/>
+                            <String fx:value="5" />
+                            <String fx:value="6" />
+                            <String fx:value="7" />
                         </FXCollections>
                     </items>
                 </ComboBox>
-                <Button prefWidth="90" text="Restart" onAction="#handleRestartButton"/>
-                <Button prefWidth="90" text="Rules" onAction="#handle" />
-                <Button prefWidth="90" text="Start" fx:id="startButton" onAction="#handleStartButton"/>
-                <Button prefWidth="90" text="Load" fx:id="loadButton" onAction="#handleLoadButton"/>
+                <Button onAction="#handleRestartButton" prefWidth="90" text="Restart" />
+                <Button onAction="#handle" prefWidth="90" text="Rules" />
+                <Button fx:id="startButton" onAction="#handleStartButton" prefWidth="90" text="Start" />
+                <Button fx:id="loadButton" onAction="#handleLoadButton" prefWidth="90" text="Load" />
             </HBox>
         </VBox>
     </bottom>
@@ -40,8 +39,8 @@
 
     </left>
    <center>
-       <VBox alignment="BOTTOM_CENTER" >
-        <GridPane fx:id="gameMatrix" prefWidth="500" prefHeight="500" alignment="BOTTOM_CENTER"/>
+       <VBox alignment="BOTTOM_CENTER">
+        <GridPane fx:id="gameMatrix" alignment="BOTTOM_CENTER" prefHeight="500" prefWidth="500"/>
        </VBox>
    </center>
     <right>

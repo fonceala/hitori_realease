@@ -87,7 +87,45 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        int[][] matrix = {
+                {1,1,3,5,5},
+                {4,2,5,3,1},
+                {4,3,3,5,4},
+                {5,1,2,3,3},
+                {3,3,4,1,1}
+        };
 
+        for(int i = 0; i < 5; i++){
+            for(int j = 0; j < 5; j++){
+                Rectangle rectangle = new Rectangle();
+                Text text = new Text(String.valueOf(matrix[i][j]));
+                text.setFill(Color.BLACK);
+                text.setFont(Font.font(24));
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setHeight(50);
+                rectangle.setWidth(50);
+                rectangle.setFill(Color.WHITE);
+
+                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                            rectangle.setFill(Color.BLACK);
+                            text.setFill(Color.WHITE);
+                        }else{
+                            rectangle.setFill(Color.WHITE);
+                            text.setFill(Color.BLACK);
+                        }
+                    }
+                });
+
+                StackPane stack = new StackPane();
+                stack.getChildren().addAll(rectangle,text);
+                gameMatrix.add(stack,j,i,1,1);
+                gameMatrix.setAlignment(Pos.BOTTOM_CENTER);
+
+            }
+        }
     }
 
     public void handleRestartButton(ActionEvent actionEvent) {
