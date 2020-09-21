@@ -2,6 +2,7 @@ package sample;
 
 import javafx.beans.binding.DoubleExpression;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,11 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.EventListener;
@@ -59,10 +62,18 @@ public class Controller implements Initializable {
             int matrixSize = Integer.valueOf(box.getValue());
             for(int i = 0; i < matrixSize; i++){
                 for(int j = 0; j < matrixSize; j++){
-                    Button button = new Button();
-                    button.setMaxWidth(50);
-                    button.setMaxHeight(50);
-                    gameMatrix.add(button,j,i,1,1);
+                    Rectangle rectangle = new Rectangle();
+                    rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            rectangle.setFill(Color.BLACK);
+                        }
+                    });
+                    rectangle.setStroke(Color.BLACK);
+                    rectangle.setHeight(50);
+                    rectangle.setWidth(50);
+                    rectangle.setFill(Color.RED);
+                    gameMatrix.add(rectangle,j,i,1,1);
                 }
             }
     }
