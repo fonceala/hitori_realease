@@ -39,7 +39,7 @@
 
     </left>
    <center>
-       <VBox alignment="BOTTOM_CENTER">
+       <VBox alignment="BOTTOM_CENTER" >
         <GridPane fx:id="gameMatrix" prefWidth="500" prefHeight="500" alignment="BOTTOM_CENTER"/>
        </VBox>
    </center>
