@@ -22,6 +22,7 @@
                 <ComboBox fx:id="box" promptText="Mode">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
+
                             <String fx:value="5"/>
                             <String fx:value="6"/>
                             <String fx:value="7"/>
@@ -31,6 +32,7 @@
                 <Button prefWidth="90" text="Restart" onAction="#handleRestartButton"/>
                 <Button prefWidth="90" text="Rules" onAction="#handle" />
                 <Button prefWidth="90" text="Start" fx:id="startButton" onAction="#handleStartButton"/>
+                <Button prefWidth="90" text="Load" fx:id="loadButton" onAction="#handleLoadButton"/>
             </HBox>
         </VBox>
     </bottom>

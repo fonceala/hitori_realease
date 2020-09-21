@@ -23,10 +23,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EventListener;
@@ -49,11 +51,13 @@ public class Controller implements Initializable {
     @FXML
     private BorderPane root;
 
-    private Matrix game;
+    private boolean choice = false;
 
-    private ArrayList<Rectangle> rectList;
+    private Matrix game = new Matrix();
 
-    private ArrayList<Text> textList;
+   private int numRows = 0;
+
+   private int[][] loadMatrix;
     @FXML
 
         public void handle(ActionEvent event) {
@@ -97,7 +101,11 @@ public class Controller implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-                startGame();
+               if(choice == true){
+                   startGame();
+               }else {
+                   startLoad();
+               }
         }else {
             alert.close();
         }
@@ -105,8 +113,10 @@ public class Controller implements Initializable {
     }
 
     public void startGame(){
+
+        choice = true;
         int matrixSize = Integer.valueOf(box.getValue());
-        game = new Matrix();
+
         gameMatrix = new GridPane();
         for(int i = 0; i < matrixSize; i++){
             for(int j = 0; j < matrixSize; j++){
@@ -124,6 +134,80 @@ public class Controller implements Initializable {
                         matrix = game.getMatrix7();
                         break;
                 }
+                Text text = new Text(String.valueOf(matrix[i][j]));
+                text.setFill(Color.BLACK);
+                text.setFont(Font.font(24));
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setHeight(50);
+                rectangle.setWidth(50);
+                rectangle.setFill(Color.WHITE);
+
+                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                            rectangle.setFill(Color.BLACK);
+                            text.setFill(Color.WHITE);
+                        }else{
+                            rectangle.setFill(Color.WHITE);
+                            text.setFill(Color.BLACK);
+                        }
+                    }
+                });
+
+                StackPane stack = new StackPane();
+                stack.getChildren().addAll(rectangle,text);
+                gameMatrix.add(stack,j,i,1,1);
+                gameMatrix.setAlignment(Pos.BOTTOM_CENTER);
+
+                root.setCenter(gameMatrix);
+            }
+        }
+    }
+
+    public void handleLoadButton(ActionEvent actionEvent) throws IOException {
+        choice = false;
+        FileChooser fileChooser = new FileChooser();
+        Stage window= new Stage();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
+        File selectedFile = fileChooser.showOpenDialog(window);
+        String data = "";
+
+
+        BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
+            String line;
+            while((line = reader.readLine()) != null){
+                data += line;
+                data+="\n";
+                numRows++;
+            }
+        System.out.println(data);
+        loadMatrix = new int[numRows][numRows];
+        int rowIndex = 0;
+        int colIndex ;
+        for(String row: data.split("\n")){
+            colIndex = 0;
+            for(String elem: row.split(" ")){
+                loadMatrix[rowIndex][colIndex] = Integer.parseInt(elem);
+                colIndex++;
+            }
+            rowIndex++;
+        }
+        System.out.println(numRows);
+        startLoad();
+
+    }
+
+    public void startLoad(){
+        int matrixSize = numRows;
+
+        gameMatrix = new GridPane();
+        for(int i = 0; i < matrixSize; i++){
+            for(int j = 0; j < matrixSize; j++){
+                Rectangle rectangle = new Rectangle();
+                int[][] matrix = loadMatrix;
+
+
                 Text text = new Text(String.valueOf(matrix[i][j]));
                 text.setFill(Color.BLACK);
                 text.setFont(Font.font(24));
