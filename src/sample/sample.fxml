@@ -22,22 +22,28 @@
                 <ComboBox fx:id="box" promptText="Mode">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="4x4"/>
-                            <String fx:value="5x5"/>
-                            <String fx:value="6x6"/>
-                            <String fx:value="7x7"/>
+                            <String fx:value="4"/>
+                            <String fx:value="5"/>
+                            <String fx:value="6"/>
+                            <String fx:value="7"/>
                         </FXCollections>
                     </items>
                 </ComboBox>
                 <Button prefWidth="90" text="Restart" />
                 <Button prefWidth="90" text="Rules" onAction="#handle" />
-                <Button prefWidth="90" text="Start" fx:id="startButton" onAction="#handleStartButton"></Button>
+                <Button prefWidth="90" text="Start" fx:id="startButton" onAction="#handleStartButton"/>
             </HBox>
         </VBox>
     </bottom>
-   <center>
-      <Canvas height="200.0" width="393.0" BorderPane.alignment="CENTER" fx:id="gameMatrix">
+    <left>
 
-       </Canvas>
+    </left>
+   <center>
+       <VBox alignment="BOTTOM_CENTER">
+        <GridPane fx:id="gameMatrix" prefWidth="500" prefHeight="500" alignment="BOTTOM_CENTER"/>
+       </VBox>
    </center>
+    <right>
+
+    </right>
 </BorderPane>

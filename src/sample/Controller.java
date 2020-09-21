@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.binding.DoubleExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -24,10 +27,10 @@ public class Controller implements Initializable {
     private javafx.scene.control.Button startButton;
 
     @FXML
-    private Canvas gameMatrix;
+    private GridPane gameMatrix;
 
     @FXML
-    private ComboBox box;
+    private ComboBox<String> box;
 
     @FXML
 
@@ -53,10 +56,13 @@ public class Controller implements Initializable {
 
     @FXML
     public void handleStartButton(ActionEvent event){
-            int matrixSize = Integer.valueOf(box.getId().charAt(0));
+            int matrixSize = Integer.valueOf(box.getValue());
             for(int i = 0; i < matrixSize; i++){
                 for(int j = 0; j < matrixSize; j++){
-
+                    Button button = new Button();
+                    button.setMaxWidth(50);
+                    button.setMaxHeight(50);
+                    gameMatrix.add(button,j,i,1,1);
                 }
             }
     }
