@@ -96,9 +96,6 @@ public class Controller implements Initializable {
         alert.setHeaderText("Resetting the game will lose all your progress!");
         alert.setContentText("Are you sure you want to reset?");
 
-
-        ButtonType cancelButton = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
                if(choice == true){
