@@ -2,7 +2,7 @@ package sample;
 
 public class Matrix {
 
-    private int[][] matrix4 = {};
+
     private int[][] matrix5 = {
             {1,1,3,5,5},
             {4,2,5,3,1},
@@ -10,16 +10,24 @@ public class Matrix {
             {5,1,2,3,3},
             {3,3,4,1,1}
     };
-    private int[][] matrix6 = {};
-    private int[][] matrix7 = {};
+    private int[][] matrix6 = {
+            {3,4,3,1,5,5},
+            {1,4,3,2,1,4},
+            {4,1,2,6,3,5},
+            {1,2,2,3,3,1},
+            {2,3,4,6,1,6},
+            {4,6,2,4,2,6}
+    };
+    private int[][] matrix7 = {
+            {5,6,6,2,2,5,3},
+            {3,7,6,5,4,4,2},
+            {1,5,3,7,3,2,1},
+            {1,2,3,4,3,6,6},
+            {3,4,1,7,7,3,5},
+            {5,3,7,1,2,6,1},
+            {3,1,7,3,4,4,7}
+    };
 
-    public int[][] getMatrix4() {
-        return matrix4;
-    }
-
-    public void setMatrix4(int[][] matrix4) {
-        this.matrix4 = matrix4;
-    }
 
     public int[][] getMatrix5() {
         return matrix5;
