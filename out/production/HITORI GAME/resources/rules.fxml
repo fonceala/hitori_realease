@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <TextArea editable="false" layoutX="4.0" layoutY="45.0" prefHeight="357.0" prefWidth="600.0" text="Hitori is played with a grid filled with numbers.&#10;&#10;Eliminate numbers by tapping them to make the following rules true:&#10;1) No row or column can have more than one occurrence of any given number.&#10;2) Removed cells cannot be touching horizontally or vertically.&#10;3) Remaining cells must form a connected continuous area.&#10;&#10;Here it is an example:" wrapText="true">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <effect>
+            <ColorAdjust />
+         </effect></TextArea>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="32.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@800px-Hitori.svg.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="283.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@800px-Hitori_completed.svg.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

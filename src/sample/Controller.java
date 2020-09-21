@@ -13,6 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -93,8 +94,13 @@ public class Controller implements Initializable {
                     rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            rectangle.setFill(Color.BLACK);
-                            text.setFill(Color.WHITE);
+                            if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                                rectangle.setFill(Color.BLACK);
+                                text.setFill(Color.WHITE);
+                            }else{
+                                rectangle.setFill(Color.WHITE);
+                                text.setFill(Color.BLACK);
+                            }
                         }
                     });
 
@@ -107,6 +113,10 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    public void handleRestartButton(ActionEvent actionEvent) {
 
     }
 }
