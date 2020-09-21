@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -69,12 +70,7 @@ public class Controller implements Initializable {
                 for(int j = 0; j < matrixSize; j++){
                     Rectangle rectangle = new Rectangle();
                     int[][] matrix={};
-                    rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent mouseEvent) {
-                            rectangle.setFill(Color.BLACK);
-                        }
-                    });
+
                     switch (matrixSize){
                         case 5:
                             matrix=game.getMatrix5();
@@ -87,11 +83,20 @@ public class Controller implements Initializable {
                             break;
                     }
                     Text text = new Text(String.valueOf(matrix[i][j]));
-                    text.setFill(Color.WHITE);
+                    text.setFill(Color.BLACK);
+                    text.setFont(Font.font(24));
                     rectangle.setStroke(Color.BLACK);
                     rectangle.setHeight(50);
                     rectangle.setWidth(50);
-                    rectangle.setFill(Color.RED);
+                    rectangle.setFill(Color.WHITE);
+
+                    rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            rectangle.setFill(Color.BLACK);
+                            text.setFill(Color.WHITE);
+                        }
+                    });
 
                     StackPane stack = new StackPane();
                     stack.getChildren().addAll(rectangle,text);
