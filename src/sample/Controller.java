@@ -138,7 +138,12 @@ public class Controller implements Initializable {
                 matrix = game.getMatrix7();
                 break;
         }
-        resultMatrix = matrix;
+        resultMatrix = new int[matrixSize][matrixSize];
+        for(int m = 0; m < resultMatrix.length; m++){
+            for(int n = 0; n < resultMatrix.length; n++){
+                resultMatrix[m][n] = matrix[m][n];
+            }
+        }
         gameMatrix = new GridPane();
         for(int i = 0; i < matrixSize; i++){
             for(int j = 0; j < matrixSize; j++){
@@ -214,7 +219,12 @@ public class Controller implements Initializable {
     public void startLoad(){
         int matrixSize = numRows;
         int[][] matrix = loadMatrix;
-        resultMatrix = matrix;
+        resultMatrix = new int[matrix.length][matrix.length];
+        for(int m = 0; m < resultMatrix.length; m++){
+            for(int n = 0; n < resultMatrix.length; n++){
+                resultMatrix[m][n] = matrix[m][n];
+            }
+        }
         gameMatrix = new GridPane();
         for(int i = 0; i < matrixSize; i++){
             for(int j = 0; j < matrixSize; j++){
@@ -264,7 +274,12 @@ public class Controller implements Initializable {
                 {5,3,7,1,2,6,1},
                 {3,1,7,3,4,4,7}
         };
-        resultMatrix = matrix;
+        resultMatrix = new int[matrix.length][matrix.length];
+        for(int m = 0; m < resultMatrix.length; m++){
+            for(int n = 0; n < resultMatrix.length; n++){
+                resultMatrix[m][n] = matrix[m][n];
+            }
+        }
         gameMatrix = new GridPane();
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
