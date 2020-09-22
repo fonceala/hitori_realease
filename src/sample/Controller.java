@@ -1,6 +1,7 @@
 package sample;
 
 import checker.Check;
+import checker.CorrectMatrixChecker;
 import checker.DuplicateChecker;
 import javafx.beans.binding.DoubleExpression;
 import javafx.event.ActionEvent;
@@ -311,6 +312,26 @@ public class Controller implements Initializable {
            alert.setHeaderText("You did not solve correctly");
            alert.setContentText("There should not be two adjacent cells deleted!");
            alert.showAndWait();
+       }else {
+           matrixTest = new CorrectMatrixChecker(resultMatrix);
+           if (!matrixTest.check()) {
+               Alert alert = new Alert(Alert.AlertType.ERROR);
+               alert.setTitle("Error");
+               alert.setHeaderText("You did not solve correctly");
+               alert.setContentText("The numbers must be unique on its corresponding row and column");
+               alert.showAndWait();
+           } else {
+               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+               alert.setTitle("Correct");
+               alert.setHeaderText("Congratulations, YOU WON!");
+               alert.setContentText("Do you want to start a new game or exit the application?");
+               Optional<ButtonType> result = alert.showAndWait();
+               if (result.get() == ButtonType.OK) {
+                   appStart();
+               } else {
+                   alert.close();
+               }
+           }
        }
     }
 }
