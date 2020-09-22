@@ -6,7 +6,7 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
-<BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1 " fx:controller="sample.Controller" fx:id="root" >
+<BorderPane prefHeight="384.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1 " fx:controller="sample.Controller" fx:id="pane" >
 
     <top>
         <Label text="Hitori Game" BorderPane.alignment="TOP_CENTER" />

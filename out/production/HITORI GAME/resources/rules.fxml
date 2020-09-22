@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.RulesController">
    <children>
       <TextArea editable="false" layoutX="4.0" layoutY="45.0" prefHeight="357.0" prefWidth="600.0" text="Hitori is played with a grid filled with numbers.&#10;&#10;Eliminate numbers by tapping them to make the following rules true:&#10;1) No row or column can have more than one occurrence of any given number.&#10;2) Removed cells cannot be touching horizontally or vertically.&#10;3) Remaining cells must form a connected continuous area.&#10;&#10;Here it is an example:" wrapText="true">
          <font>

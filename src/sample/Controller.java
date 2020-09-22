@@ -49,9 +49,9 @@ public class Controller implements Initializable {
     private ComboBox<String> box;
 
     @FXML
-    private BorderPane root;
+    private BorderPane pane;
 
-    private boolean choice = false;
+    private int choice = -1;
 
     private Matrix game = new Matrix();
 
@@ -87,7 +87,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        appStart();
     }
 
     public void handleRestartButton(ActionEvent actionEvent) {
@@ -98,10 +98,14 @@ public class Controller implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-               if(choice == true){
+               if(choice == 1){
                    startGame();
                }else {
-                   startLoad();
+                   if(choice == -1) {
+                       startLoad();
+                   }else{
+                       appStart();
+                   }
                }
         }else {
             alert.close();
@@ -111,7 +115,7 @@ public class Controller implements Initializable {
 
     public void startGame(){
 
-        choice = true;
+        choice = 1;
         int matrixSize = Integer.valueOf(box.getValue());
 
         gameMatrix = new GridPane();
@@ -157,13 +161,13 @@ public class Controller implements Initializable {
                 gameMatrix.add(stack,j,i,1,1);
                 gameMatrix.setAlignment(Pos.BOTTOM_CENTER);
 
-                root.setCenter(gameMatrix);
+                pane.setCenter(gameMatrix);
             }
         }
     }
 
     public void handleLoadButton(ActionEvent actionEvent) throws IOException {
-        choice = false;
+        choice = -1;
         FileChooser fileChooser = new FileChooser();
         Stage window= new Stage();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
@@ -231,7 +235,53 @@ public class Controller implements Initializable {
                 gameMatrix.add(stack,j,i,1,1);
                 gameMatrix.setAlignment(Pos.BOTTOM_CENTER);
 
-                root.setCenter(gameMatrix);
+                pane.setCenter(gameMatrix);
+            }
+        }
+    }
+
+    public void appStart(){
+        choice = 0;
+        gameMatrix = new GridPane();
+        for(int i = 0; i < 7; i++){
+            for(int j = 0; j < 7; j++){
+                Rectangle rectangle = new Rectangle();
+                int[][] matrix = {
+                        {5,6,6,2,2,5,3},
+                        {3,7,6,5,4,4,2},
+                        {1,5,3,7,3,2,1},
+                        {1,2,3,4,3,6,6},
+                        {3,4,1,7,7,3,5},
+                        {5,3,7,1,2,6,1},
+                        {3,1,7,3,4,4,7}
+                };
+                Text text = new Text(String.valueOf(matrix[i][j]));
+                text.setFill(Color.BLACK);
+                text.setFont(Font.font(24));
+                rectangle.setStroke(Color.BLACK);
+                rectangle.setHeight(50);
+                rectangle.setWidth(50);
+                rectangle.setFill(Color.WHITE);
+
+                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+                            rectangle.setFill(Color.BLACK);
+                            text.setFill(Color.WHITE);
+                        }else{
+                            rectangle.setFill(Color.WHITE);
+                            text.setFill(Color.BLACK);
+                        }
+                    }
+                });
+
+                StackPane stack = new StackPane();
+                stack.getChildren().addAll(rectangle,text);
+                gameMatrix.add(stack,j,i,1,1);
+                gameMatrix.setAlignment(Pos.BOTTOM_CENTER);
+
+                pane.setCenter(gameMatrix);
             }
         }
     }
