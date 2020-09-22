@@ -7,7 +7,7 @@ public class DuplicateChecker extends Check{
         super(matrix);
     }
 
-    public boolean checkDuplicates(){
+    public boolean check(){
         int result = 0;
         int[][] m = super.getCheckMatrix();
         for(int i = 0; i < m.length; i++){
@@ -16,16 +16,16 @@ public class DuplicateChecker extends Check{
                     break;
                 }else{
                     if(i == m.length-1){
-                        if(m[i][j] == m[i][j+1]){
+                        if(m[i][j] == 0 && m[i][j+1] == 0){
                             result = 1;
                         }
                     }else{
                         if(j == m.length-1){
-                            if(m[i][j] == m[i+1][j]){
+                            if(m[i][j] == 0 && m[i+1][j] == 0){
                                 result = 1;
                             }
                         }else{
-                            if(m[i][j] == m[i][j+1] || m[i][j] == m[i+1][j]){
+                            if((m[i][j] == 0 && m[i][j+1] == 0) || (m[i][j] == 0 && m[i+1][j] == 0)){
                                 result = 1;
                             }
                         }

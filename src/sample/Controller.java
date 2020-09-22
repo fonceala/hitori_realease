@@ -1,5 +1,7 @@
 package sample;
 
+import checker.Check;
+import checker.DuplicateChecker;
 import javafx.beans.binding.DoubleExpression;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -51,6 +53,8 @@ public class Controller implements Initializable {
     @FXML
     private BorderPane pane;
 
+    private int[][] resultMatrix;
+
     private int choice = -1;
 
     private Matrix game = new Matrix();
@@ -58,6 +62,8 @@ public class Controller implements Initializable {
    private int numRows = 0;
 
    private int[][] loadMatrix;
+
+   private Check matrixTest;
     @FXML
 
         public void handle(ActionEvent event) {
@@ -117,24 +123,25 @@ public class Controller implements Initializable {
 
         choice = 1;
         int matrixSize = Integer.valueOf(box.getValue());
+        int[][] matrix={};
 
+        switch (matrixSize){
+            case 5:
+                matrix=game.getMatrix5();
+                break;
+            case 6:
+                matrix = game.getMatrix6();
+                break;
+            case 7:
+                matrix = game.getMatrix7();
+                break;
+        }
+        resultMatrix = matrix;
         gameMatrix = new GridPane();
         for(int i = 0; i < matrixSize; i++){
             for(int j = 0; j < matrixSize; j++){
                 Rectangle rectangle = new Rectangle();
-                int[][] matrix={};
 
-                switch (matrixSize){
-                    case 5:
-                        matrix=game.getMatrix5();
-                        break;
-                    case 6:
-                        matrix = game.getMatrix6();
-                        break;
-                    case 7:
-                        matrix = game.getMatrix7();
-                        break;
-                }
                 Text text = new Text(String.valueOf(matrix[i][j]));
                 text.setFill(Color.BLACK);
                 text.setFont(Font.font(24));
@@ -142,16 +149,19 @@ public class Controller implements Initializable {
                 rectangle.setHeight(50);
                 rectangle.setWidth(50);
                 rectangle.setFill(Color.WHITE);
-
+                final int row = i;
+                final int col = j;
                 rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                             rectangle.setFill(Color.BLACK);
                             text.setFill(Color.WHITE);
+                            resultMatrix[row][col] = 0;
                         }else{
                             rectangle.setFill(Color.WHITE);
                             text.setFill(Color.BLACK);
+                            resultMatrix[row][col] = Integer.parseInt(text.getText());
                         }
                     }
                 });
@@ -201,14 +211,12 @@ public class Controller implements Initializable {
 
     public void startLoad(){
         int matrixSize = numRows;
-
+        int[][] matrix = loadMatrix;
+        resultMatrix = matrix;
         gameMatrix = new GridPane();
         for(int i = 0; i < matrixSize; i++){
             for(int j = 0; j < matrixSize; j++){
                 Rectangle rectangle = new Rectangle();
-                int[][] matrix = loadMatrix;
-
-
                 Text text = new Text(String.valueOf(matrix[i][j]));
                 text.setFill(Color.BLACK);
                 text.setFont(Font.font(24));
@@ -216,16 +224,19 @@ public class Controller implements Initializable {
                 rectangle.setHeight(50);
                 rectangle.setWidth(50);
                 rectangle.setFill(Color.WHITE);
-
+                final int row = i;
+                final int col = j;
                 rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                             rectangle.setFill(Color.BLACK);
                             text.setFill(Color.WHITE);
+                            resultMatrix[row][col] = 0;
                         }else{
                             rectangle.setFill(Color.WHITE);
                             text.setFill(Color.BLACK);
+                            resultMatrix[row][col] = Integer.parseInt(text.getText());
                         }
                     }
                 });
@@ -242,19 +253,21 @@ public class Controller implements Initializable {
 
     public void appStart(){
         choice = 0;
+        int[][] matrix = {
+                {5,6,6,2,2,5,3},
+                {3,7,6,5,4,4,2},
+                {1,5,3,7,3,2,1},
+                {1,2,3,4,3,6,6},
+                {3,4,1,7,7,3,5},
+                {5,3,7,1,2,6,1},
+                {3,1,7,3,4,4,7}
+        };
+        resultMatrix = matrix;
         gameMatrix = new GridPane();
         for(int i = 0; i < 7; i++){
             for(int j = 0; j < 7; j++){
                 Rectangle rectangle = new Rectangle();
-                int[][] matrix = {
-                        {5,6,6,2,2,5,3},
-                        {3,7,6,5,4,4,2},
-                        {1,5,3,7,3,2,1},
-                        {1,2,3,4,3,6,6},
-                        {3,4,1,7,7,3,5},
-                        {5,3,7,1,2,6,1},
-                        {3,1,7,3,4,4,7}
-                };
+
                 Text text = new Text(String.valueOf(matrix[i][j]));
                 text.setFill(Color.BLACK);
                 text.setFont(Font.font(24));
@@ -263,15 +276,19 @@ public class Controller implements Initializable {
                 rectangle.setWidth(50);
                 rectangle.setFill(Color.WHITE);
 
+                final int row = i;
+                final int col = j;
                 rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
                             rectangle.setFill(Color.BLACK);
                             text.setFill(Color.WHITE);
+                            resultMatrix[row][col] = 0;
                         }else{
                             rectangle.setFill(Color.WHITE);
                             text.setFill(Color.BLACK);
+                            resultMatrix[row][col] = Integer.parseInt(text.getText());
                         }
                     }
                 });
@@ -286,4 +303,14 @@ public class Controller implements Initializable {
         }
     }
 
+    public void handleCheckButton(ActionEvent actionEvent) {
+       matrixTest = new DuplicateChecker(resultMatrix);
+       if(!matrixTest.check()){
+           Alert alert = new Alert(Alert.AlertType.ERROR);
+           alert.setTitle("Error");
+           alert.setHeaderText("You did not solve correctly");
+           alert.setContentText("There should not be two adjacent cells deleted!");
+           alert.showAndWait();
+       }
+    }
 }

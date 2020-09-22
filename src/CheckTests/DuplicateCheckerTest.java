@@ -17,7 +17,7 @@ class DuplicateCheckerTest {
                 {3,3,4,1,1}
         };
         Check duplicate = new DuplicateChecker(matrix);
-        boolean result = duplicate.checkDuplicates();
+        boolean result = duplicate.check();
         assertFalse(result);
 
         int[][] matrix1 = {
@@ -27,6 +27,6 @@ class DuplicateCheckerTest {
         };
 
         duplicate.setCheckMatrix(matrix1);
-        assertTrue(duplicate.checkDuplicates());
+        assertTrue(duplicate.check());
     }
 }

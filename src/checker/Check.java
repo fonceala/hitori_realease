@@ -15,5 +15,6 @@ public abstract class Check {
    public void setCheckMatrix(int[][] matrix){
         this.checkMatrix = matrix;
    }
-   public abstract boolean checkDuplicates();
+   public abstract boolean check();
 }
+
