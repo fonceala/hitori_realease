@@ -3,6 +3,7 @@ package sample;
 import checker.Check;
 import checker.CorrectMatrixChecker;
 import checker.DuplicateChecker;
+import checker.SingleComponentChecker;
 import javafx.beans.binding.DoubleExpression;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -183,9 +184,9 @@ public class Controller implements Initializable {
         Stage window= new Stage();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
         File selectedFile = fileChooser.showOpenDialog(window);
-        String data = "";
+        String data = new String("");
 
-
+        numRows = 0;
         BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
             String line;
             while((line = reader.readLine()) != null){
@@ -321,15 +322,24 @@ public class Controller implements Initializable {
                alert.setContentText("The numbers must be unique on its corresponding row and column");
                alert.showAndWait();
            } else {
-               Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-               alert.setTitle("Correct");
-               alert.setHeaderText("Congratulations, YOU WON!");
-               alert.setContentText("Do you want to start a new game or exit the application?");
-               Optional<ButtonType> result = alert.showAndWait();
-               if (result.get() == ButtonType.OK) {
-                   appStart();
-               } else {
-                   alert.close();
+               matrixTest = new SingleComponentChecker(resultMatrix);
+               if(!matrixTest.check()){
+                   Alert alert = new Alert(Alert.AlertType.ERROR);
+                   alert.setTitle("Error");
+                   alert.setHeaderText("You did not solve correctly");
+                   alert.setContentText("The result must form a single component");
+                   alert.showAndWait();
+               }else {
+                   Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                   alert.setTitle("Correct");
+                   alert.setHeaderText("Congratulations, YOU WON!");
+                   alert.setContentText("Do you want to start a new game or exit the application?");
+                   Optional<ButtonType> result = alert.showAndWait();
+                   if (result.get() == ButtonType.OK) {
+                       appStart();
+                   } else {
+                       alert.close();
+                   }
                }
            }
        }
