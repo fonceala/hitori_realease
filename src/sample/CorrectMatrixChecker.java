@@ -1,6 +1,6 @@
-package checker;
+package sample;
 
-public class CorrectMatrixChecker extends Check{
+public class CorrectMatrixChecker extends Check {
 
     public CorrectMatrixChecker(int[][] matrix){
         super(matrix);
@@ -19,7 +19,6 @@ public class CorrectMatrixChecker extends Check{
                 }
             }
         }
-
         return true;
     }
 
@@ -30,7 +29,6 @@ public class CorrectMatrixChecker extends Check{
                 entryRow++;
             }
         }
-
         if(entryRow == 1)
             return true;
         return false;

@@ -1,6 +1,6 @@
-package checker;
+package sample;
 
-public class SingleComponentChecker extends Check{
+public class SingleComponentChecker extends Check {
 
 
     public SingleComponentChecker(int[][] matrix){

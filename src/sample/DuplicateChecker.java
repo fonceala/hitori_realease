@@ -1,6 +1,6 @@
-package checker;
+package sample;
 
-public class DuplicateChecker extends Check{
+public class DuplicateChecker extends Check {
 
 
     public DuplicateChecker(int[][] matrix){

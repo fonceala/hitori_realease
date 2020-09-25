@@ -1,4 +1,4 @@
-package checker;
+package sample;
 
 public abstract class Check {
 

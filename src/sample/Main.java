@@ -1,16 +1,9 @@
 package sample;
 
-import checker.Check;
-import checker.CorrectMatrixChecker;
-import checker.DuplicateChecker;
-import checker.SingleComponentChecker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -26,9 +19,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -50,7 +41,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+
         BorderPane root = new BorderPane();
 
         //TOP================================================================
@@ -147,42 +138,43 @@ public class Main extends Application {
     }
 
 
-//
     public void handleRulesButton(ActionEvent event) throws FileNotFoundException {
-
-
-
         VBox root = new VBox();
         TextArea ta = new TextArea();
         ta.setWrapText(true);
-        ta.setText("Hitori is played with a grid filled with numbers.&#10;&#10;Eliminate numbers by tapping them to make the following rules true:&#10;1) No row or column can have more than one occurrence of any given number.&#10;2) Removed cells cannot be touching horizontally or vertically.&#10;3) Remaining cells must form a connected continuous area.&#10;&#10;Here it is an example:");
+        ta.setText("Hitori is played with a grid filled with numbers." +
+                "\nEliminate numbers by tapping them to make the following rules true: \n" +
+                "\n----No row or column can have more than one occurrence of any given number." +
+                "\n----Removed cells cannot be touching horizontally or vertically. " +
+                "\n----Remaining cells must form a connected continuous area." +
+                "\nHere it is an example:");
 
-       // ImageView view1 = new ImageView(new Image(new FileInputStream("/resources/800px-Hitori.svg.png")));
-        //ImageView view2 = new ImageView(new Image(new FileInputStream("/resources/800px-Hitori_completed.svg.png")));
 
-       // HBox imageBox = new HBox();
-        //imageBox.setAlignment(Pos.CENTER);
-        //imageBox.setSpacing(100);
-        //imageBox.getChildren().addAll(view1,view2);
-
+           //there should be some images with the example of solving the Hitori puzzle
+        ImageView view1 = new ImageView(new Image(new FileInputStream("E:\\Tudor\\HITORI_GAME_3\\src\\resources\\800px-Hitori.svg.png")));
+        ImageView view2 = new ImageView(new Image(new FileInputStream("E:\\Tudor\\HITORI_GAME_3\\src\\resources\\800px-Hitori_completed.svg.png")));
+         view1.setFitHeight(200);
+         view1.setFitWidth(200);
+         view2.setFitWidth(200);
+         view2.setFitHeight(200);
+        HBox imageBox = new HBox();
+        imageBox.setAlignment(Pos.CENTER);
+        imageBox.setSpacing(100);
+        imageBox.getChildren().addAll(view1,view2);
 
         root.setAlignment(Pos.CENTER);
         root.setSpacing(40);
-
-        root.getChildren().addAll(ta);
+        root.getChildren().addAll(ta,imageBox);
         Stage stage = new Stage();
         stage.setTitle("Hitori Rules");
         stage.setScene(new Scene(root, 600, 600));
         stage.show();
-
     }
-//
-//
+
     public void handleStartButton(ActionEvent event,BorderPane pane){
         startGame(pane);
     }
-//
-//
+
     public void handleRestartButton(ActionEvent actionEvent,BorderPane pane) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Reset Confirmation");
@@ -203,11 +195,9 @@ public class Main extends Application {
         }else {
             alert.close();
         }
-
     }
-//
-    public void startGame(BorderPane pane){
 
+    public void startGame(BorderPane pane){
         choice = 1;
         int matrixSize = Integer.valueOf(box.getValue());
         int[][] matrix={};
@@ -265,14 +255,14 @@ public class Main extends Application {
             }
         }
     }
-//
+
     public void handleLoadButton(ActionEvent actionEvent,BorderPane pane) throws IOException {
         choice = -1;
         FileChooser fileChooser = new FileChooser();
         Stage window= new Stage();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files","*.txt"));
         File selectedFile = fileChooser.showOpenDialog(window);
-        String data = new String("");
+        String data = "";
 
         numRows = 0;
         BufferedReader reader = new BufferedReader(new FileReader(selectedFile));
@@ -298,7 +288,7 @@ public class Main extends Application {
         startLoad(pane);
 
     }
-//
+
     public void startLoad(BorderPane pane){
         int matrixSize = numRows;
         int[][] matrix = loadMatrix;
@@ -321,18 +311,8 @@ public class Main extends Application {
                 rectangle.setFill(Color.WHITE);
                 final int row = i;
                 final int col = j;
-                rectangle.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        handleRectAndText(mouseEvent,rectangle,text,row,col);
-                    }
-                });
-                text.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
-                        handleRectAndText(mouseEvent,rectangle,text,row,col);
-                    }
-                });
+                rectangle.setOnMouseClicked(mouseEvent -> handleRectAndText(mouseEvent,rectangle,text,row,col));
+                text.setOnMouseClicked(mouseEvent -> handleRectAndText(mouseEvent,rectangle,text,row,col));
                 StackPane stack = new StackPane();
                 stack.getChildren().addAll(rectangle,text);
                 gameMatrix.add(stack,j,i,1,1);
@@ -342,7 +322,7 @@ public class Main extends Application {
             }
         }
     }
-//
+
     public void appStart(BorderPane pane){
         choice = 0;
         int[][] matrix = {
@@ -397,7 +377,7 @@ public class Main extends Application {
             }
         }
     }
-//
+
     public void handleCheckButton(ActionEvent actionEvent, BorderPane pane) {
         matrixTest = new DuplicateChecker(resultMatrix);
         if(!matrixTest.check()){
