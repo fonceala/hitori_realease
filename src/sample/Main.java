@@ -1,20 +1,11 @@
 package sample;
 
-import checker.Check;
-import checker.CorrectMatrixChecker;
-import checker.DuplicateChecker;
-import checker.SingleComponentChecker;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -26,9 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class Main extends Application {
 
@@ -52,6 +41,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         BorderPane root = new BorderPane();
+
+       root.setPrefSize(400,150);
 
         //TOP================================================================
         HBox titleBox = new HBox();
@@ -136,7 +127,10 @@ public class Main extends Application {
         appStart(root);
 
         primaryStage.setTitle("Hitori Game");
-        primaryStage.setScene(new Scene(root, 600, 500));
+        Scene scene = new Scene(root);
+
+        primaryStage.setScene(scene);
+        primaryStage.sizeToScene();
         primaryStage.show();
 
     }
@@ -156,14 +150,6 @@ public class Main extends Application {
         TextArea ta = new TextArea();
         ta.setWrapText(true);
         ta.setText("Hitori is played with a grid filled with numbers.&#10;&#10;Eliminate numbers by tapping them to make the following rules true:&#10;1) No row or column can have more than one occurrence of any given number.&#10;2) Removed cells cannot be touching horizontally or vertically.&#10;3) Remaining cells must form a connected continuous area.&#10;&#10;Here it is an example:");
-
-       // ImageView view1 = new ImageView(new Image(new FileInputStream("/resources/800px-Hitori.svg.png")));
-        //ImageView view2 = new ImageView(new Image(new FileInputStream("/resources/800px-Hitori_completed.svg.png")));
-
-       // HBox imageBox = new HBox();
-        //imageBox.setAlignment(Pos.CENTER);
-        //imageBox.setSpacing(100);
-        //imageBox.getChildren().addAll(view1,view2);
 
 
         root.setAlignment(Pos.CENTER);

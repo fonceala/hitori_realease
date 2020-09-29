@@ -1,7 +1,7 @@
 package CheckTests;
 
-import checker.Check;
-import checker.DuplicateChecker;
+import sample.Check;
+import sample.DuplicateChecker;
 
 import static org.junit.jupiter.api.Assertions.*;
 

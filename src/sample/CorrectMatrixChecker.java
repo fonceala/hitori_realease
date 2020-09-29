@@ -1,6 +1,8 @@
-package checker;
+package sample;
 
-public class CorrectMatrixChecker extends Check{
+import sample.Check;
+
+public class CorrectMatrixChecker extends Check {
 
     public CorrectMatrixChecker(int[][] matrix){
         super(matrix);

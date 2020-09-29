@@ -1,6 +1,8 @@
-package checker;
+package sample;
 
-public class DuplicateChecker extends Check{
+import sample.Check;
+
+public class DuplicateChecker extends Check {
 
 
     public DuplicateChecker(int[][] matrix){
