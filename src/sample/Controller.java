@@ -56,19 +56,13 @@ public class Controller implements Initializable {
     @FXML
 
         public void handle(ActionEvent event) {
-
-
                 Parent root;
                 try {
-                    //root= loader.setLocation(FXMLDocumentController.class.getResource("rules.fxml"));
-
                     root = FXMLLoader.load(getClass().getResource("/resources/rules.fxml"));
                     Stage stage = new Stage();
                     stage.setTitle("Hitori Rules");
                     stage.setScene(new Scene(root, 600, 600));
                     stage.show();
-                    // Hide this current window (if this is what you want)
-                    // ((Node)(event.getSource())).getScene().getWindow().hide();
                 } catch (
                         IOException e) {
                     e.printStackTrace();
